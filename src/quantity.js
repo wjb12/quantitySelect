@@ -27,7 +27,6 @@
     //初始化
     Quantity.prototype.init = function (opt) {
         var _this = this,
-            timer,
             doc = $(document);
 
         _this.addBtn = doc.find(opt.addBtn);
@@ -42,7 +41,8 @@
 
     //绑定事件
     Quantity.prototype.evt = function () {
-        var _this = this;
+        var _this = this,
+            timer;
         _this.addBtn
             .on('click', function () {
                 _this.add();
@@ -113,8 +113,12 @@
 
     //消息控制
     Quantity.prototype.msgCtrl = function () {
+
+
+
         this.msgBox.empty();
         if (this.no >= this.tupleMaxbuy) {
+            console.log(this.msgBox);
             this.msgBox.text('本商品最多可购买：' + this.tupleMaxbuy + '件');
         }
 
@@ -161,7 +165,7 @@
 
     //加了倍数后的最大购买数和最小购买数
     Quantity.prototype.setTupleMaxMin = function () {
-        this.tupleMaxbuy = Math.min(Math.floor(this.maxbuy / this.tuple) * this.tuple, this.stock);
+        this.tupleMaxbuy = Math.floor(Math.min(this.maxbuy, this.stock) / this.tuple) * this.tuple;
         this.tupleMinbuy = Math.max(Math.ceil(this.minbuy / this.tuple) * this.tuple, this.tuple);
     };
 

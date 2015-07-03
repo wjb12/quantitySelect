@@ -51,34 +51,58 @@
 </style>
 </head>
 <body>
-    <div>
-        数量：<input type="text" id="input">
-    </div>
-    <div class="num-box fl">
+
+    <table>
+        <tr>
+            <td>数量：</td>
+            <td><input type="text"></td>
+            <td width="600">
+                <div class="num-box fl">
+                    <a href="javascript:;" class="num-add fr">+</a>
+                    <a href="javascript:;" class="num-cut fl num-lose">-</a>
+                    <span class="num-number"></span>
+                </div>
+                <div class="det-msg">
+                </div>
+            </td>
+        </tr>
+         <tr>
+            <td>数量：</td>
+            <td><input type="text"></td>
+            <td><div class="num-box fl">
         <a href="javascript:;" class="num-add fr">+</a>
         <a href="javascript:;" class="num-cut fl num-lose">-</a>
         <span class="num-number"></span>
     </div>
-    <div class="det-msg"></div>
+    <div class="det-msg"></div></td>
+        </tr>
+    </table>
 </body>
 
 <script type="text/javascript">
     $(function(){
-        var input = $('#input'),
-            quantity = $('.num-box').quantity({
-                cutBtn: '.num-cut',
-                addBtn: '.num-add',
-                numBox: '.num-number',
-                msgBox: '.det-msg',
+
+        $('tr').each(function(index){
+            var tr = $(this)
+            input = tr.find('input'),
+            quantity = tr.find('.num-box').quantity({
+                cutBtn: tr.find('.num-cut'),
+                addBtn: tr.find('.num-add'),
+                numBox: tr.find('.num-number'),
+                msgBox: tr.find('.det-msg'),
                 callback: function (n) {
                     input.val(n);
                 }
             });
 
-        quantity.setTuple(2); //设置倍数购买
-        quantity.setMinbuy(3); //设置最小购买量
-        quantity.setMaxbuy(100); //设置最大购买量
-        quantity.setStock(99); //设置库存
+            quantity.setTuple(2); //设置倍数购买
+            quantity.setMinbuy(3); //设置最小购买量
+            quantity.setMaxbuy(100); //设置最大购买量
+            quantity.setStock(99); //设置库存
+        });
+
+
+        
     });
 </script>
 </html>
