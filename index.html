@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src ="src/quantity.js"></script>
+<style type="text/css">
+    a{
+        color: #333;
+        text-decoration: none;
+    }
+    .fl{float: left;}
+    .fr{float: right;}
+    .num-box, .det-msg {
+        height: 28px;
+        line-height: 28px;
+        margin: 0 10px 0 0;
+    }
+
+    .num-box {
+        border: 1px solid #b3b3b3;
+        width: 80px;
+        text-align: center;
+    }
+    .num-box a {
+        display: block;
+        width: 24px;
+        height: 28px;
+        cursor: pointer;
+        background: #efefef;
+    }
+    .num-cut{
+        border-right: 1px solid  #b3b3b3;
+    }
+    .num-add{
+        border-left: 1px solid  #b3b3b3;
+    }
+    .num-number{
+        font-size: 16px;
+    }
+
+    a.num-lose{
+        color: #aaa;
+        background: #fefefe;
+        cursor:not-allowed;
+    }
+</style>
+</head>
+<body>
+    <div>
+        数量：<input type="text" id="input">
+    </div>
+    <div class="num-box fl">
+        <a href="javascript:;" class="num-add fr">+</a>
+        <a href="javascript:;" class="num-cut fl num-lose">-</a>
+        <span class="num-number"></span>
+    </div>
+    <div class="det-msg"></div>
+</body>
+
+<script type="text/javascript">
+    $(function(){
+        var input = $('#input'),
+            quantity = $('.num-box').quantity({
+                cutBtn: '.num-cut',
+                addBtn: '.num-add',
+                numBox: '.num-number',
+                msgBox: '.det-msg',
+                callback: function (n) {
+                    input.val(n);
+                }
+            });
+
+        quantity.setTuple(2); //设置倍数购买
+        quantity.setMinbuy(3); //设置最小购买量
+        quantity.setMaxbuy(100); //设置最大购买量
+        quantity.setStock(99); //设置库存
+    });
+</script>
+</html>
